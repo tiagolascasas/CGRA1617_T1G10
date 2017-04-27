@@ -10,7 +10,7 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.cylinder = new MyCylinder(this.scene, 40, 20);
 	this.top = new MyLamp(this.scene, 40, 20);
 	this.lid = new MyPolygon(this.scene, 40);
-	this.helix = new MyQuad(this.scene, 0, 1, 0, 1);
+	this.helix = new MyHelix(this.scene);
 	this.prism = new MyPrism(this.scene, 1, 1);
 	this.cube = new MyUnitCubeQuad(this.scene);
 
@@ -24,7 +24,8 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.y = 3.0;
 	this.z = 0.0;
 	this.rotation = 0.0;
-	this.helixR = 0.0;
+	
+	this.previousTime = Date.now();
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -114,30 +115,12 @@ MySubmarine.prototype.display = function()
 
 	this.scene.pushMatrix();	//left helix, back
 		this.scene.translate(-0.53, -0.25, 0.1);
-		this.scene.rotate(this.helixR, 0, 0, 1);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
 
-	this.scene.pushMatrix();	//left helix, front
-		this.scene.translate(-0.53, -0.25, 0.1);
-		this.scene.rotate(this.helixR, 0, 0, 1);
-		this.scene.scale(0.05, 0.35, 1);
-		this.helix.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//left helix, cover
-		this.scene.translate(-0.53, -0.25, 0.1);
-		this.scene.scale(0.025, 0.025, 0.1);
-		this.top.display();
-	this.scene.popMatrix();
 
 	this.scene.pushMatrix();	//right helix, back
 		this.scene.translate(0.53, -0.25, 0.1);
-		this.scene.rotate(this.helixR, 0, 0, 1);
-		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
 
@@ -268,4 +251,12 @@ MySubmarine.prototype.applyAppearance = function ()
 	this.scene.submarineAppearance[this.scene.currSubmarineAppearance].apply();
 	
 //	this.appearance1.apply();
+};
+
+
+MySubmarine.prototype.update = function(time)
+{
+	var deltaT = time - this.previousTime;
+	this.previousTime = time;
+	this.helix.update(time);
 };

@@ -76,7 +76,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.axis = new CGFaxis(this);
 
-	this.setUpdatePeriod(100);
+	this.setUpdatePeriod(125);
 	this.Velocity = 0.1;
 
 	this.Light_0 = true;
@@ -84,10 +84,11 @@ LightingScene.prototype.init = function(application) {
 	this.Light_2 = true;
 	this.Light_3 = true;
 	this.Animated_Clock = true;
+	
 };
 
 LightingScene.prototype.initCameras = function() {
-	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
+	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
 };
 
 LightingScene.prototype.initLights = function() {
@@ -216,6 +217,8 @@ LightingScene.prototype.update = function(currTime)
 	if (this.Animated_Clock)
 		this.clock.update(currTime);
 
+	this.submarine.update(currTime);
+	
 	this.Light_0 ? this.lights[0].enable() : this.lights[0].disable();
 	this.Light_1 ? this.lights[1].enable() : this.lights[1].disable();
 	this.Light_2 ? this.lights[2].enable() : this.lights[2].disable();
