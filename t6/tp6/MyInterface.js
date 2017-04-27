@@ -27,6 +27,8 @@ MyInterface.prototype.init = function(application) {
 
 	// add a group of controls (and open/expand by defult)
 	
+	this.gui.add(this.scene, 'submarineAppearanceGUI', this.scene.submarineAppearancesList);
+	
 	var group=this.gui.addFolder("Lights");
 	group.open();
 

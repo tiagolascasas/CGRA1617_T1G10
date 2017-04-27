@@ -14,10 +14,7 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.prism = new MyPrism(this.scene, 1, 1);
 	this.cube = new MyUnitCubeQuad(this.scene);
 
-	this.appearance1 = new CGFappearance(this.scene);
-	this.appearance1.loadTexture("../resources/images/metal1.png");
-	this.appearance1.setTextureWrap('REPEAT', 'REPEAT');
-
+	
 	this.xmin = xmin;
 	this.xmax = xmax;
 	this.zmin = zmin;
@@ -267,9 +264,8 @@ MySubmarine.prototype.move = function(mov, ds)
 
 MySubmarine.prototype.applyAppearance = function ()
 {
-	if (this.scene.currSubmarineAppearance == "Appearance 1")
-	{
-		this.appearance1.apply();
-	}
+	
+	this.scene.submarineAppearance[this.scene.currSubmarineAppearance].apply();
+	
 //	this.appearance1.apply();
 };

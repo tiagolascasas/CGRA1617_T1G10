@@ -36,13 +36,36 @@ LightingScene.prototype.init = function(application) {
 	this.poleMaterial.setAmbient(0.2, 0.2, 0.2, 1);
 	this.poleMaterial.setSpecular(0.8, 0.8, 0.8, 1);
 	this.poleMaterial.setDiffuse(0.4, 0.4, 0.4, 1);
+	
+	//appearances
+	
+	this.metal = new CGFappearance(this);
+	this.metal.loadTexture("../resources/images/metal1.png");
+	this.metal.setTextureWrap('REPEAT', 'REPEAT');
+	
+	this.wood = new CGFappearance(this);
+	this.wood.loadTexture("../resources/images/wood.png");
+	this.wood.setTextureWrap('REPEAT', 'REPEAT');
+	
+	this.gold = new CGFappearance(this);
+	this.gold.loadTexture("../resources/images/gold.png");
+	this.gold.setTextureWrap('REPEAT', 'REPEAT');
+
 
 	this.submarineAppearancesList = [
-		"Appearance 1",
-		"Appearance 2",
-		"Appearance 3"
+		"Metal",
+		"Wood",
+		"Gold"
 	];
-	this.currSubmarineAppearance = this.submarineAppearancesList[0];
+	
+	
+	this.submarineAppearanceGUI = "Metal";
+	this.currSubmarineAppearance =  0;
+	this.submarineAppearance = [];
+	this.submarineAppearance[0] = this.metal;
+	this.submarineAppearance[1] = this.wood;
+	this.submarineAppearance[2] = this.gold;
+	
 
 	// Scene elements
 	this.floor = new MyQuad(this, 0, 4, 0, 4);
@@ -182,6 +205,9 @@ LightingScene.prototype.display = function() {
 		this.submarine.display();
     this.popMatrix();
 
+
+
+	this.changeAppearence();
 	// ---- END Primitive drawing section
 };
 
@@ -200,3 +226,21 @@ LightingScene.prototype.Stop_Clock = function ()
 {
 	this.Animated_Clock = !this.Animated_Clock;	
 };
+
+
+LightingScene.prototype.changeAppearence = function (){
+	    //GUI Appearance choice  
+
+	switch (this.submarineAppearanceGUI) {
+    case "Metal":
+        this.currSubmarineAppearance = 0;
+        break;
+    case "Wood":
+        this.currSubmarineAppearance = 1;
+        break;
+    case "Gold":
+        this.currSubmarineAppearance = 2;
+        break;
+    }		
+   
+}
