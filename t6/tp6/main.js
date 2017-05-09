@@ -19,6 +19,7 @@ serialInclude([
 	'MyInterface.js',
 	'MyHelix.js',
 	'MySemiSphere.js',
+	'MyPeriscope.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

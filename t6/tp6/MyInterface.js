@@ -85,7 +85,39 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (68): case (100):	//D d
 			this.scene.submarine.move('R_RIGHT', this.scene.Velocity);
 			break;
+
+
 		default: break;
 	};
 };
+
+
+MyInterface.prototype.processKeyDown = function(event) {
+
+    switch (event.keyCode) {
+        case (80): case (112):	//P p
+        this.scene.submarine.periscope.lower();
+        break;
+        case (76): case (108):	//L l
+        this.scene.submarine.periscope.lift();
+        break;
+
+    }
+
+};
+
+MyInterface.prototype.processKeyUp = function (event) {
+
+    switch (event.keyCode) {
+        case (80): case (112):	//P p
+        this.scene.submarine.periscope.stopLower();
+        break;
+        case (76): case (108):	//L l
+        this.scene.submarine.periscope.stopLift();
+        break;
+
+    }
+
+};
+
 

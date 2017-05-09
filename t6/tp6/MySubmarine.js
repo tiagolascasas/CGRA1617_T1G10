@@ -13,6 +13,7 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.helix = new MyHelix(this.scene);
 	this.prism = new MyPrism(this.scene, 1, 1);
 	this.cube = new MyUnitCubeQuad(this.scene);
+	this.periscope = new MyPeriscope(this.scene);
 
 	
 	this.xmin = xmin;
@@ -156,31 +157,7 @@ MySubmarine.prototype.display = function()
 		this.lid.display();
 	this.scene.popMatrix();
 
-	this.scene.pushMatrix();	//horizontal pipe front lid
-		this.scene.translate(0, 1.52, 2.52 + 0.25);
-		this.scene.scale(0.05, 0.05, 0.25);
-		this.lid.display();
-	this.scene.popMatrix();
 
-	this.scene.pushMatrix();	//horizontal pipe
-		this.scene.translate(0, 1.52, 2.52);
-		this.scene.scale(0.05, 0.05, 0.25);
-		this.cylinder.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//vertical pipe lid
-		this.scene.translate(0, 1.57, 2.6);
-		this.scene.scale(0.05, 1, 0.05);
-		this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-		this.lid.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//vertical pipe
-		this.scene.translate(0, 1.57, 2.6);
-		this.scene.scale(0.05, 1, 0.05);
-		this.scene.rotate(Math.PI / 2, 1, 0, 0);
-		this.cylinder.display();
-	this.scene.popMatrix();
 
 	this.scene.pushMatrix();	//top cylinder lid
 		this.scene.translate(0, 1.07, 2.3);
@@ -212,6 +189,9 @@ MySubmarine.prototype.display = function()
 		this.scene.scale(0.365, 0.5, 4.08);
 		this.cylinder.display();
 	this.scene.popMatrix();
+
+
+	this.periscope.display();
 };
 
 MySubmarine.prototype.move = function(mov, ds)
@@ -254,9 +234,16 @@ MySubmarine.prototype.applyAppearance = function ()
 };
 
 
-MySubmarine.prototype.update = function(time)
+MySubmarine.prototype.update = function(t)
 {
-	var deltaT = time - this.previousTime;
-	this.previousTime = time;
-	this.helix.update(time);
+	var deltaT = t - this.previousTime;
+	this.previousTime = t;
+	this.helix.update(t);
+
+    this.periscope.update(t);
 };
+
+MySubmarine.prototype.periscopeUp = function () {
+	
+}
+	
