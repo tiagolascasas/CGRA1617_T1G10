@@ -25,6 +25,7 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.y = 3.0;
 	this.z = 0.0;
 	this.rotation = 0.0;
+	this.speed = 0.1;
 	
 	this.previousTime = Date.now();
 };
@@ -198,21 +199,19 @@ MySubmarine.prototype.move = function(mov, ds)
 {
 	if (mov == 'FORWARD')
 	{
-		this.x += Math.sin(this.rotation) * ds;
-		this.z += Math.cos(this.rotation) * ds;
+		this.speed  += 0.1;
 	}
 	else if (mov == 'BACKWARD')
 	{
-		this.x -= Math.sin(this.rotation) * ds;
-		this.z -= Math.cos(this.rotation) * ds;
+		this.speed -= 0.1;
 	}
 	else if (mov == 'R_LEFT')
 	{
-		this.rotation += ds / 3;
+		this.rotation += ds / 100;
 	}
 	else if (mov == 'R_RIGHT')
 	{
-		this.rotation -= ds / 3;
+		this.rotation -= ds / 100;
 	}
 
 	if (this.x < this.xmin)
@@ -236,6 +235,15 @@ MySubmarine.prototype.applyAppearance = function ()
 
 MySubmarine.prototype.update = function(t)
 {
+	if(this.speed >0) {
+        this.x += Math.sin(this.speed + this.rotation)/100;
+        this.z += Math.cos(this.speed + this.rotation)/100;
+    }
+    else
+	{
+        this.x -= Math.sin(-1 * this.speed + this.rotation)/100;
+        this.z -= Math.cos(-1 * this.speed + this.rotation)/100;
+	}
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
 	this.helix.update(t);
@@ -243,7 +251,4 @@ MySubmarine.prototype.update = function(t)
     this.periscope.update(t);
 };
 
-MySubmarine.prototype.periscopeUp = function () {
-	
-}
 	

@@ -76,7 +76,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.axis = new CGFaxis(this);
 
-	this.setUpdatePeriod(125);
+	this.setUpdatePeriod(50);
 	this.Velocity = 0.1;
 
 	this.Light_0 = true;

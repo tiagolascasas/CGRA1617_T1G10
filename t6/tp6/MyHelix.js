@@ -1,10 +1,16 @@
+MyHelix.rotationSpeeds =
+    {
 
+        SLOW: 0.2,
+        NORMAL: 1,
+        FAST: 10
+    };
 
 function MyHelix(scene) {
     CGFobject.call(this, scene);
     this.scene = scene;
   
-	this.rotationDir = 1;
+	this.rotationDir = MyHelix.rotationSpeeds.FAST;
 	this.rotationSpeed = 0.1;
 
 	this.previousTime = Date.now();
@@ -41,9 +47,37 @@ MyHelix.prototype.display = function() {
 
 
 MyHelix.prototype.update = function(time) {
-    var deltaT = t - this.previousTime;
+    var deltaT = time - this.previousTime;
     this.previousTime = time;
     this.helixR = this.helixR + (2 * Math.PI * deltaT * this.rotationSpeed * this.rotationDir * this.scene.Velocity);
 	
   
-}
+};
+
+MyHelix.prototype.increaseSpeed = function() {
+    switch (this.rotationSpeed) {
+        case MyHelix.rotationSpeeds.SLOW:
+            this.rotationSpeed = MyHelix.rotationSpeeds.NORMAL;
+            break;
+        case MyHelix.rotationSpeeds.NORMAL:
+            this.rotationSpeed = MyHelix.rotationSpeeds.FAST;
+            break;
+        case MyHelix.rotationSpeeds.FAST:
+            this.rotationSpeed = MyHelix.rotationSpeeds.VERYFAST;
+            break;
+    }
+};
+
+MyHelix.prototype.decreaseSpeed = function() {
+    switch (this.rotationSpeed) {
+        case MyHelix.rotationSpeeds.FAST:
+            this.rotationSpeed = MyHelix.rotationSpeeds.NORMAL;
+            break;
+        case MyHelix.rotationSpeeds.NORMAL:
+            this.rotationSpeed = MyHelix.rotationSpeeds.SLOW;
+            break;
+        case MyHelix.rotationSpeeds.SLOW:
+            this.rotationSpeed = MyHelix.rotationSpeeds.VERYSLOW;
+            break;
+    }
+};
