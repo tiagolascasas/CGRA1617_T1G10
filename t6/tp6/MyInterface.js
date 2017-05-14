@@ -101,7 +101,12 @@ MyInterface.prototype.processKeyDown = function(event) {
         case (76): case (108):	//L l
         this.scene.submarine.periscope.lift();
         break;
-
+		case (65):	case (97):	//A a
+		this.scene.submarine.isTurningLeft = true;
+		break;
+		case (68): case (100):	//D d
+		this.scene.submarine.isTurningRight = true;
+		break;
     }
 
 };
@@ -115,9 +120,13 @@ MyInterface.prototype.processKeyUp = function (event) {
         case (76): case (108):	//L l
         this.scene.submarine.periscope.stopLift();
         break;
-
+        case (65):	case (97):	//A a
+		this.scene.submarine.isTurningLeft = false;
+		break;
+		case (68): case (100):	//D d
+		this.scene.submarine.isTurningRight = false;
+		break;
     }
-
 };
 
 

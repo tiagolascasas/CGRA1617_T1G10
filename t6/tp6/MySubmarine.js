@@ -28,6 +28,9 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	this.speed = 0.1;
 	
 	this.previousTime = Date.now();
+
+	this.isTurningLeft = false;
+	this.isTurningRight = false;
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -92,6 +95,10 @@ MySubmarine.prototype.display = function()
 
 	this.scene.pushMatrix();	//back v fin edge #2
 		this.scene.translate(0, 0.82, 0);
+		if (this.isTurningRight)
+			this.scene.rotate(-Math.PI / 6, 0, 1, 0);
+		if (this.isTurningLeft)
+			this.scene.rotate(Math.PI / 6, 0, 1, 0);
 		this.scene.scale(0.075, 0.35, 0.25);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -101,6 +108,10 @@ MySubmarine.prototype.display = function()
 
 	this.scene.pushMatrix();	//back v fin edge #1
 		this.scene.translate(0, -0.82, 0);
+		if (this.isTurningRight)
+			this.scene.rotate(-Math.PI / 6, 0, 1, 0);
+		if (this.isTurningLeft)
+			this.scene.rotate(Math.PI / 6, 0, 1, 0);
 		this.scene.scale(0.075, 0.35, 0.25);
 		this.scene.rotate(-Math.PI, 1, 0, 0);
 		this.scene.rotate(Math.PI / 2, 0, 1, 0);
@@ -109,6 +120,10 @@ MySubmarine.prototype.display = function()
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();	//back vertical fin
+		if (this.isTurningRight)
+			this.scene.rotate(-Math.PI / 6, 0, 1, 0);
+		if (this.isTurningLeft)
+			this.scene.rotate(Math.PI / 6, 0, 1, 0);
 		this.scene.translate(0, 0, 0);
 		this.scene.scale(0.075, 1.64, 0.25);
 		this.scene.translate(0, 0, -0.5);
@@ -119,7 +134,6 @@ MySubmarine.prototype.display = function()
 		this.scene.translate(-0.53, -0.25, 0.1);
 		this.helix.display();
 	this.scene.popMatrix();
-
 
 	this.scene.pushMatrix();	//right helix, back
 		this.scene.translate(0.53, -0.25, 0.1);
@@ -157,8 +171,6 @@ MySubmarine.prototype.display = function()
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.lid.display();
 	this.scene.popMatrix();
-
-
 
 	this.scene.pushMatrix();	//top cylinder lid
 		this.scene.translate(0, 1.07, 2.3);
@@ -200,18 +212,26 @@ MySubmarine.prototype.move = function(mov, ds)
 	if (mov == 'FORWARD')
 	{
 		this.speed  += 0.1;
+		this.isTurningLeft = false;
+		this.isTurningRight = false;
 	}
 	else if (mov == 'BACKWARD')
 	{
 		this.speed -= 0.1;
+		this.isTurningLeft = false;
+		this.isTurningRight = false;
 	}
 	else if (mov == 'R_LEFT')
 	{
 		this.rotation += ds / 100;
+		this.isTurningLeft = true;
+		this.isTurningRight = false;
 	}
 	else if (mov == 'R_RIGHT')
 	{
 		this.rotation -= ds / 100;
+		this.isTurningRight = true;
+		this.isTurningLeft = false;
 	}
 
 	if (this.x < this.xmin)
@@ -247,7 +267,6 @@ MySubmarine.prototype.update = function(t)
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
 	this.helix.update(t);
-
     this.periscope.update(t);
 };
 
