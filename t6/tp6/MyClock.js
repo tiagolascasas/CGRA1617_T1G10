@@ -97,5 +97,7 @@ MyClock.prototype.update = function (currTime)
 		this.secondHand.setAngle(this.sAngle);
 		this.minuteHand.setAngle(this.mAngle);
 		this.hourHand.setAngle(this.hAngle);
+		if (this.counter >= 1000)
+			this.counter = 0;
 	}
 } 
