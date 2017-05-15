@@ -1,17 +1,10 @@
-MyHelix.rotationSpeeds =
-    {
-
-        SLOW: 0.2,
-        NORMAL: 1,
-        FAST: 10
-    };
 
 function MyHelix(scene) {
     CGFobject.call(this, scene);
     this.scene = scene;
   
-	this.rotationDir = MyHelix.rotationSpeeds.FAST;
-	this.rotationSpeed = 0.1;
+	this.rotationDir = 1;
+
 
 	this.previousTime = Date.now();
 	
@@ -26,14 +19,14 @@ MyHelix.prototype.constructor = MyHelix;
 MyHelix.prototype.display = function() {
 	
 	this.scene.pushMatrix();	//helix, back
-		this.scene.rotate(this.helixR * degToRad * this.rotationDir, 0, 0, 1);
+		this.scene.rotate(this.helixR, 0, 0, 1);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();	// helix, front
-		this.scene.rotate(this.helixR * degToRad * this.rotationDir, 0, 0, 1);
+		this.scene.rotate(this.helixR, 0, 0, 1);
 		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
@@ -49,8 +42,8 @@ MyHelix.prototype.display = function() {
 MyHelix.prototype.update = function(time) {
     var deltaT = time - this.previousTime;
     this.previousTime = time;
-    this.helixR = this.helixR + (2 * Math.PI * deltaT * this.rotationSpeed * this.rotationDir * this.scene.Velocity);
-	
+    this.helixR = this.helixR + ((2 * Math.PI * deltaT * this.scene.Velocity * this.rotationDir * this.scene.Velocity)/360);
+
   
 };
 
@@ -71,13 +64,13 @@ MyHelix.prototype.increaseSpeed = function() {
 MyHelix.prototype.decreaseSpeed = function() {
     switch (this.rotationSpeed) {
         case MyHelix.rotationSpeeds.FAST:
-            this.rotationSpeed = MyHelix.rotationSpeeds.NORMAL;
+            this.rotationSpeed = MyHelix.rotationSpeeds.FAST;
             break;
         case MyHelix.rotationSpeeds.NORMAL:
-            this.rotationSpeed = MyHelix.rotationSpeeds.SLOW;
+            this.rotationSpeed = MyHelix.rotationSpeeds.NORMAL;
             break;
         case MyHelix.rotationSpeeds.SLOW:
-            this.rotationSpeed = MyHelix.rotationSpeeds.VERYSLOW;
+            this.rotationSpeed = MyHelix.rotationSpeeds.SLOW;
             break;
     }
 };

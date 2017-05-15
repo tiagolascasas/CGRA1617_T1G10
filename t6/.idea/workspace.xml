@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyHelix.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyHelix.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tp6/MyHelix.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="40" />
+            <state relative-caret-position="85">
+              <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -65,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BackFin.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BackFin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tp6/BackFin.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="521">
-              <caret line="62" column="56" lean-forward="false" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
+              <caret line="62" column="55" lean-forward="false" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -78,7 +78,7 @@
       <file leaf-file-name="LightingScene.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tp6/LightingScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="374">
               <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
               <folding />
             </state>
@@ -98,8 +98,8 @@
       <file leaf-file-name="MyInterface.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tp6/MyInterface.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="126" column="37" lean-forward="false" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+            <state relative-caret-position="918">
+              <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -130,12 +130,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/tp6/MyPeriscope.js" />
-        <option value="$PROJECT_DIR$/tp6/MyHelix.js" />
         <option value="$PROJECT_DIR$/tp6/LightingScene.js" />
         <option value="$PROJECT_DIR$/tp6/main.js" />
         <option value="$PROJECT_DIR$/tp6/MySubmarine.js" />
-        <option value="$PROJECT_DIR$/tp6/MyInterface.js" />
         <option value="$PROJECT_DIR$/tp6/BackFin.js" />
+        <option value="$PROJECT_DIR$/tp6/MyInterface.js" />
+        <option value="$PROJECT_DIR$/tp6/MyHelix.js" />
       </list>
     </option>
   </component>
@@ -298,12 +298,12 @@
       <updated>1494337274043</updated>
       <workItem from="1494337281589" duration="3416000" />
       <workItem from="1494425737724" duration="2429000" />
-      <workItem from="1494852951321" duration="3170000" />
+      <workItem from="1494852951321" duration="3808000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9015000" />
+    <option name="totallyTimeSpent" value="9653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -473,22 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tp6/MyHelix.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tp6/LightingScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tp6/MyUnitCubeQuad.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-210">
@@ -521,18 +505,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tp6/MyInterface.js">
+    <entry file="file://$PROJECT_DIR$/tp6/BackFin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="126" column="37" lean-forward="false" selection-start-line="126" selection-start-column="37" selection-end-line="126" selection-end-column="37" />
+        <state relative-caret-position="521">
+          <caret line="62" column="55" lean-forward="false" selection-start-line="62" selection-start-column="55" selection-end-line="62" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tp6/BackFin.js">
+    <entry file="file://$PROJECT_DIR$/tp6/LightingScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="62" column="56" lean-forward="false" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
+        <state relative-caret-position="374">
+          <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tp6/MyInterface.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tp6/MyHelix.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
           <folding />
         </state>
       </provider>

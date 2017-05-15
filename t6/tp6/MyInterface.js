@@ -52,7 +52,7 @@ MyInterface.prototype.init = function(application) {
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
-	this.gui.add(this.scene, 'Velocity', 0.1, 2.0);
+	this.gui.add(this.scene, 'Velocity', 0.1, 1.0);
 
 //	this.gui.add(this.scene, 'Animated_Clock');
 

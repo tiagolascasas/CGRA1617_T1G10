@@ -60,7 +60,7 @@ BackFin.prototype.update = function()
      }
      else{
          if(this.currentAngle != 0)
-         this.currentAngle += -1 * this.currentAngle/10;
+         this.currentAngle += -1 * this.currentAngle/20;
      }
 
 }
