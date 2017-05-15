@@ -31,6 +31,7 @@ MyHelix.prototype.display = function() {
 		this.helix.display();
 	this.scene.popMatrix();
 
+
 	this.scene.pushMatrix();	//helix, cover
 		this.scene.scale(0.025, 0.025, 0.1);
 		this.top.display();

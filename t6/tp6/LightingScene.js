@@ -197,9 +197,6 @@ LightingScene.prototype.display = function() {
 
     // Submarine
     this.pushMatrix();
-    	this.translate(	this.submarine.x,
-    	 				this.submarine.y, 
-    	 				this.submarine.z);
     	this.rotate(this.submarine.rotation, 0, 1, 0);
     	this.submarine.applyAppearance();
    // 	this.submarine.appearance1.apply();

@@ -76,15 +76,16 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (87): case (119):	//W w
 			this.scene.submarine.move('FORWARD', this.scene.Velocity);
 			break;
-		case (65):	case (97):	//A a
+		/*case (65):	case (97):	//A a
 			this.scene.submarine.move('R_LEFT', this.scene.Velocity);
-			break;
+			break;*/
 		case (83): case (115):	//S s
 			this.scene.submarine.move('BACKWARD', this.scene.Velocity);
 			break;
-		case (68): case (100):	//D d
+		/*case (68): case (100):	//D d
 			this.scene.submarine.move('R_RIGHT', this.scene.Velocity);
-			break;
+			break;*/
+	
 
 
 		default: break;
@@ -102,11 +103,20 @@ MyInterface.prototype.processKeyDown = function(event) {
         this.scene.submarine.periscope.lift();
         break;
 		case (65):	case (97):	//A a
+		this.scene.submarine.turningLeft = true;
 		this.scene.submarine.backFin.isTurningLeft = true;
 		break;
 		case (68): case (100):	//D d
+		this.scene.submarine.turningRight = true;
 		this.scene.submarine.backFin.isTurningRight = true;
 		break;
+		case (81): case (113):	//D d
+		this.scene.submarine.goingUp = true;
+		break;
+		case (69): case (101):	//D d
+		this.scene.submarine.goingDown = true;
+		break;
+
     }
 
 };
@@ -121,10 +131,18 @@ MyInterface.prototype.processKeyUp = function (event) {
         this.scene.submarine.periscope.stopLift();
         break;
         case (65):	case (97):	//A a
+        this.scene.submarine.turningLeft = false;
 		this.scene.submarine.backFin.isTurningLeft = false;
 		break;
 		case (68): case (100):	//D d
+		this.scene.submarine.turningRight = false;
 		this.scene.submarine.backFin.isTurningRight = false;
+		break;
+		case (81): case (113):	//D d
+		this.scene.submarine.goingUp = false;
+		break;
+		case (69): case (101):	//D d
+		this.scene.submarine.goingDown = false;
 		break;
     }
 };
