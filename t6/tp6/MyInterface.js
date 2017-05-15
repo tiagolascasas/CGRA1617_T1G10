@@ -102,10 +102,10 @@ MyInterface.prototype.processKeyDown = function(event) {
         this.scene.submarine.periscope.lift();
         break;
 		case (65):	case (97):	//A a
-		this.scene.submarine.isTurningLeft = true;
+		this.scene.submarine.backFin.isTurningLeft = true;
 		break;
 		case (68): case (100):	//D d
-		this.scene.submarine.isTurningRight = true;
+		this.scene.submarine.backFin.isTurningRight = true;
 		break;
     }
 
@@ -121,10 +121,10 @@ MyInterface.prototype.processKeyUp = function (event) {
         this.scene.submarine.periscope.stopLift();
         break;
         case (65):	case (97):	//A a
-		this.scene.submarine.isTurningLeft = false;
+		this.scene.submarine.backFin.isTurningLeft = false;
 		break;
 		case (68): case (100):	//D d
-		this.scene.submarine.isTurningRight = false;
+		this.scene.submarine.backFin.isTurningRight = false;
 		break;
     }
 };

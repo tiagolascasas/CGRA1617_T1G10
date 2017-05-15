@@ -20,6 +20,7 @@ serialInclude([
 	'MyHelix.js',
 	'MySemiSphere.js',
 	'MyPeriscope.js',
+	'BackFin.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
