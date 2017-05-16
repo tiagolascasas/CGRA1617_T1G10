@@ -3,7 +3,7 @@
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function MySubmarine(scene, xmin, xmax, zmin, zmax) 
+function MySubmarine(scene, xmin, xmax, ymin, ymax, zmin, zmax) 
 {
 	CGFobject.call(this,scene);
 
@@ -19,6 +19,8 @@ function MySubmarine(scene, xmin, xmax, zmin, zmax)
 	
 	this.xmin = xmin;
 	this.xmax = xmax;
+	this.ymin = ymin;
+	this.ymax = ymax;
 	this.zmin = zmin;
 	this.zmax = zmax;
 
@@ -43,10 +45,12 @@ MySubmarine.prototype.constructor=MySubmarine;
 MySubmarine.prototype.display = function()
 {
 	this.scene.pushMatrix();
-	this.scene.translate(this.x,this.y,this.z);
-	this.scene.rotate(this.rotation,0,1,0);
-	this.scene.rotate(this.verticalRotation,1,0,0);
-	this.scene.translate(0,0,-2);
+
+	this.scene.translate(this.x, this.y, this.z);
+	this.scene.rotate(this.verticalRotation, 1, 0, 0);
+	this.scene.rotate(this.rotation, 0, 1, 0);
+	this.scene.translate(0, 0, -2.04);
+
 	this.scene.pushMatrix();	//front h fin edge #2
 		this.scene.translate(-0.61, 0.8, 2.4);
 		this.scene.rotate(3*Math.PI / 2, 0, 0, 1);
@@ -106,8 +110,6 @@ MySubmarine.prototype.display = function()
 		this.backFin.display();
 	this.scene.popMatrix();
 
-
-
 	this.scene.pushMatrix();	//left helix, back
 		this.scene.translate(-0.53, -0.25, 0.1);
 		this.helix.display();
@@ -117,8 +119,6 @@ MySubmarine.prototype.display = function()
 		this.scene.translate(0.53, -0.25, 0.1);
 		this.helix.display();
 	this.scene.popMatrix();
-
-
 
 	this.scene.pushMatrix();	//left helix, cover
 		this.scene.translate(0.53, -0.25, 0.1);
@@ -176,8 +176,8 @@ MySubmarine.prototype.display = function()
 		this.cylinder.display();
 	this.scene.popMatrix();
 
-
 	this.periscope.display();
+
 	this.scene.popMatrix();
 };
 
@@ -199,21 +199,16 @@ MySubmarine.prototype.move = function(mov, ds)
 	{
 		this.rotation -= Math.PI/30;
 	}*/
-	
 };
 
 MySubmarine.prototype.applyAppearance = function ()
 {
-	
 	this.scene.submarineAppearance[this.scene.currSubmarineAppearance].apply();
-	
-//	this.appearance1.apply();
 };
 
 
 MySubmarine.prototype.update = function(t)
 {
-
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
 	this.helix.update(t);
@@ -236,15 +231,32 @@ MySubmarine.prototype.update = function(t)
      }
 
      if(this.turningLeft){
-		this.rotation += Math.PI/1200;
+		this.rotation += Math.PI/500;
      }
      else if(this.turningRight) {
-     	this.rotation -= Math.PI/1200;
+     	this.rotation -= Math.PI/500;
      }
 
      this.x += (Math.sin(this.rotation*2)/100)*this.speed;
      this.z += (Math.cos(this.rotation*2)/100)*this.speed;
 
+     this.checkBounds();
 };
 
-	
+MySubmarine.prototype.checkBounds = function()
+{
+	if (this.x <= this.xmin)
+		this.x = this.xmin;
+	if (this.x >= this.xmax)
+		this.x = this.xmax;
+
+	if (this.y <= this.ymin)
+		this.y = this.ymin;
+	if (this.y >= this.ymax)
+		this.y = this.ymax;
+
+	if (this.z <= this.zmin)
+		this.z = this.zmin;
+	if (this.z >= this.zmax)
+		this.z = this.zmax;	
+};

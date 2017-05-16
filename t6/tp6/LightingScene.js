@@ -72,7 +72,7 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock(this);
 	this.pole = new MyCylinder(this, 30, 10);
 	this.poleLid = new MyPolygon(this, 30);
-	this.submarine = new MySubmarine(this, -3, 10.5, -3, 10.5);
+	this.submarine = new MySubmarine(this, -3, 10.5, 1.2, 10, -3, 10.5);
 
 	this.axis = new CGFaxis(this);
 
@@ -197,9 +197,7 @@ LightingScene.prototype.display = function() {
 
     // Submarine
     this.pushMatrix();
-    	this.rotate(this.submarine.rotation, 0, 1, 0);
     	this.submarine.applyAppearance();
-   // 	this.submarine.appearance1.apply();
 		this.submarine.display();
     this.popMatrix();
 
