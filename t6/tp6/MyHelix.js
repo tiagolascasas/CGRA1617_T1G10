@@ -19,14 +19,14 @@ MyHelix.prototype.constructor = MyHelix;
 MyHelix.prototype.display = function() {
 	
 	this.scene.pushMatrix();	//helix, back
-		this.scene.rotate(this.helixR, 0, 0, 1);
+		this.scene.rotate(this.helixR , 0, 0, 1);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();	// helix, front
-		this.scene.rotate(this.helixR, 0, 0, 1);
+		this.scene.rotate(this.helixR  , 0, 0, 1);
 		this.scene.scale(0.05, 0.35, 1);
 		this.helix.display();
 	this.scene.popMatrix();
@@ -43,7 +43,13 @@ MyHelix.prototype.display = function() {
 MyHelix.prototype.update = function(time,speed) {
     var deltaT = time - this.previousTime;
     this.previousTime = time;
-    this.helixR = this.helixR + ((2 * Math.PI * deltaT * this.scene.Velocity * this.rotationDir * this.scene.Velocity * speed *3)/360);
+
+    if(speed >0)
+        this.helixR +=  ((2 * Math.PI * deltaT * this.scene.Velocity * this.scene.Velocity * speed *3)/360) ;
+    else
+        this.helixR -=  ((2 * Math.PI * deltaT * this.scene.Velocity * this.scene.Velocity * speed *3)/360);
+
+
 
   
 };

@@ -59,6 +59,7 @@ LightingScene.prototype.init = function(application) {
 	];
 	
 	
+	
 	this.submarineAppearanceGUI = "Metal";
 	this.currSubmarineAppearance =  0;
 	this.submarineAppearance = [];
@@ -205,6 +206,11 @@ LightingScene.prototype.display = function() {
 
 	this.changeAppearence();
 	// ---- END Primitive drawing section
+
+
+
+
+
 };
 
 LightingScene.prototype.update = function(currTime)
