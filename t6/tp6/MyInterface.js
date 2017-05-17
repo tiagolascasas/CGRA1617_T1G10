@@ -76,17 +76,10 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (87): case (119):	//W w
 			this.scene.submarine.move('FORWARD', this.scene.Velocity);
 			break;
-		/*case (65):	case (97):	//A a
-			this.scene.submarine.move('R_LEFT', this.scene.Velocity);
-			break;*/
+
 		case (83): case (115):	//S s
 			this.scene.submarine.move('BACKWARD', this.scene.Velocity);
 			break;
-		/*case (68): case (100):	//D d
-			this.scene.submarine.move('R_RIGHT', this.scene.Velocity);
-			break;*/
-	
-
 
 		default: break;
 	};
@@ -110,13 +103,15 @@ MyInterface.prototype.processKeyDown = function(event) {
 		this.scene.submarine.turningRight = true;
 		this.scene.submarine.backFin.isTurningRight = true;
 		break;
-		case (81): case (113):	//D d
+		case (81): case (113):	//Q q
 		this.scene.submarine.goingUp = true;
 		break;
-		case (69): case (101):	//D d
+		case (69): case (101):	//E e
 		this.scene.submarine.goingDown = true;
 		break;
-
+		case (70): case (102): 	//F f
+		this.scene.torpedo.startAnimation = true;
+		break;
     }
 
 };

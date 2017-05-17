@@ -74,10 +74,13 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder(this, 30, 10);
 	this.poleLid = new MyPolygon(this, 30);
 	this.submarine = new MySubmarine(this, -3, 10.5, 1.2, 10, -3, 10.5);
-
-	////
 	this.torpedo = new MyTorpedo(this);
-	////
+	this.torpedo.start();
+
+	this.targets = [];
+	this.targets.push(new MyTarget(this, 0, 1, 1));
+	this.targets.push(new MyTarget(this, 5, 1, 5));
+	this.targets.push(new MyTarget(this, 2, 2, 0));
 
 	this.axis = new CGFaxis(this);
 
@@ -205,20 +208,26 @@ LightingScene.prototype.display = function() {
     	this.submarine.applyAppearance();
 		this.submarine.display();
     this.popMatrix();
-
+	
+	// Torpedo
     this.pushMatrix();
 		this.torpedo.display();
     this.popMatrix();
 
+	//Targets
+	for (i = 0; i < this.targets.length; i++)
+	{
+		if (this.targets[i] != null)
+		{
+			this.pushMatrix();
+			this.targets[i].display();
+			this.popMatrix();
+		}
+	}
 
 
 	this.changeAppearence();
 	// ---- END Primitive drawing section
-
-
-
-
-
 };
 
 LightingScene.prototype.update = function(currTime)
@@ -227,6 +236,7 @@ LightingScene.prototype.update = function(currTime)
 		this.clock.update(currTime);
 
 	this.submarine.update(currTime);
+	this.torpedo.update();
 	
 	this.Light_0 ? this.lights[0].enable() : this.lights[0].disable();
 	this.Light_1 ? this.lights[1].enable() : this.lights[1].disable();
