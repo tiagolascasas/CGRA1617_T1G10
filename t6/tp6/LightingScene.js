@@ -36,6 +36,11 @@ LightingScene.prototype.init = function(application) {
 	this.poleMaterial.setAmbient(0.2, 0.2, 0.2, 1);
 	this.poleMaterial.setSpecular(0.8, 0.8, 0.8, 1);
 	this.poleMaterial.setDiffuse(0.4, 0.4, 0.4, 1);
+
+    this.redMaterial = new CGFappearance(this);
+    this.redMaterial.setAmbient(1.0, 0.0, 0.0, 1);
+    this.redMaterial.setSpecular(1.0, 0.5, 0.0, 1);
+    this.redMaterial.setDiffuse(1.0, 0.5, 0.0, 1);
 	
 	//appearances
 	
@@ -85,6 +90,7 @@ LightingScene.prototype.init = function(application) {
 	this.Light_2 = true;
 	this.Light_3 = true;
 	this.Animated_Clock = true;
+	this.explosion = new MyExplosion(this,2,2,2);
 	
 };
 
@@ -169,7 +175,7 @@ LightingScene.prototype.display = function() {
 	// ---- BEGIN Primitive drawing section
 
 	//Floor
-	this.pushMatrix();
+	/*this.pushMatrix();
 		this.scale(15, 1, 15);
 		this.translate(0.3, 0, 0.3);
 		this.rotate(-Math.PI / 2, 1, 0, 0);
@@ -207,8 +213,10 @@ LightingScene.prototype.display = function() {
 	this.changeAppearence();
 	// ---- END Primitive drawing section
 
+*/
 
 
+	this.explosion.display();
 
 
 };
@@ -219,11 +227,13 @@ LightingScene.prototype.update = function(currTime)
 		this.clock.update(currTime);
 
 	this.submarine.update(currTime);
+	this.explosion.update();
 	
 	this.Light_0 ? this.lights[0].enable() : this.lights[0].disable();
 	this.Light_1 ? this.lights[1].enable() : this.lights[1].disable();
 	this.Light_2 ? this.lights[2].enable() : this.lights[2].disable();
 	this.Light_3 ? this.lights[3].enable() : this.lights[3].disable();
+
 };
 
 LightingScene.prototype.Stop_Clock = function ()

@@ -22,6 +22,8 @@ serialInclude([
 	'MyPeriscope.js',
 	'BackFin.js',
 	'MyRoute.js',
+	'MySphere.js',
+	'MyExplosion.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
