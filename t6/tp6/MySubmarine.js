@@ -211,7 +211,7 @@ MySubmarine.prototype.update = function(t)
 {
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
-	this.helix.update(t);
+	this.helix.update(t,this.speed);
     this.periscope.update(t);
     this.backFin.update();
 
