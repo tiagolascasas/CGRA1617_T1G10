@@ -74,6 +74,10 @@ LightingScene.prototype.init = function(application) {
 	this.poleLid = new MyPolygon(this, 30);
 	this.submarine = new MySubmarine(this, -3, 10.5, 1.2, 10, -3, 10.5);
 
+	////
+	this.torpedo = new MyTorpedo(this);
+	////
+
 	this.axis = new CGFaxis(this);
 
 	this.setUpdatePeriod(50);
@@ -199,6 +203,10 @@ LightingScene.prototype.display = function() {
     this.pushMatrix();
     	this.submarine.applyAppearance();
 		this.submarine.display();
+    this.popMatrix();
+
+    this.pushMatrix();
+		this.torpedo.display();
     this.popMatrix();
 
 
