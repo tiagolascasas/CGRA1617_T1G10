@@ -10,7 +10,8 @@ function MyTorpedo(scene)
 	this.cylinder = new MyCylinder(this.scene, 40, 20);
 	this.top = new MyLamp(this.scene, 40, 20);
 	this.backFin = new BackFin(this.scene);
-	this.route = new  MyRoute(this.scene,100);
+	this.route = new  MyRoute(this.scene);
+	
 	this.appearance = new CGFappearance(this.scene);
 	this.appearance.setAmbient(0.4, 0.4, 0.4, 1);
 	this.appearance.setDiffuse(89.0/255.0, 102.0/255.0, 122.0/255.0, 1);
@@ -86,19 +87,24 @@ MyTorpedo.prototype.update = function(t)
 		this.y = this.scene.submarine.y - 0.6;
 		this.z = this.scene.submarine.z;
 
-		this.route.p1 = [this.x, this.y, this.z];
+		var p1 = [];
+		var p2 = [];
+		var p3 = [];
+		var p4 = [];
+
+		p1 = [this.x, this.y, this.z];
 	
 		var i;
 		for (i = 0; i < this.scene.targets.length; i++)
 		{
 			if (this.scene.targets[i] != null)
 			{
-				this.route.p4 = [this.scene.targets[i].x,
-								this.scene.targets[i].y,
-								this.scene.targets[i].z];
-				this.route.p3 = [this.scene.targets[i].x,
-								this.scene.targets[i].y + 3,
-								this.scene.targets[i].z];
+				p4 = [this.scene.targets[i].x,
+					this.scene.targets[i].y,
+					this.scene.targets[i].z];
+				p3 = [this.scene.targets[i].x,
+					this.scene.targets[i].y + 3,
+					this.scene.targets[i].z];
 				this.currentTarget = i;
 				break;
 			}
@@ -108,13 +114,13 @@ MyTorpedo.prototype.update = function(t)
 			this.startAnimation = false;
 			return;
 		}
-		this.route.p2 = [1, 0, 0];
+		p2 = [1, 0, 0];
 		
-		this.route.calc();
+		this.route.calc(p1, p2, p3, p4);
 
 		this.counter++;
 	}
-	else if (this.counter > 1 && this.counter < 100)
+	else if (this.counter > 1 && this.counter < this.route.stacks)
 	{
 		this.x = this.route.coords[this.counter].x;
 		this.y = this.route.coords[this.counter].y;

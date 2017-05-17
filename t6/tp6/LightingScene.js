@@ -84,7 +84,8 @@ LightingScene.prototype.init = function(application) {
 
 	this.axis = new CGFaxis(this);
 
-	this.setUpdatePeriod(50);
+	this.refreshRate = 50;
+	this.setUpdatePeriod(this.refreshRate);
 	this.Velocity = 0.1;
 
 	this.Light_0 = true;

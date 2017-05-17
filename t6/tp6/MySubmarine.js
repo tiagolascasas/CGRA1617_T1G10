@@ -237,8 +237,8 @@ MySubmarine.prototype.update = function(t)
      	this.rotation -= Math.PI/500;
      }
 
-     this.x += (Math.sin(this.rotation*2)/100)*this.speed;
-     this.z += (Math.cos(this.rotation*2)/100)*this.speed;
+     this.x += (Math.sin(this.rotation)/100)*this.speed;
+     this.z += (Math.cos(this.rotation)/100)*this.speed;
 
      this.checkBounds();
 };

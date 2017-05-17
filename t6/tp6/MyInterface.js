@@ -110,7 +110,14 @@ MyInterface.prototype.processKeyDown = function(event) {
 		this.scene.submarine.goingDown = true;
 		break;
 		case (70): case (102): 	//F f
-		this.scene.torpedo.startAnimation = true;
+		for (i = 0; i < this.scene.targets.length; i++)
+		{
+			if (this.scene.targets[i] != null)
+			{
+				this.scene.torpedo.startAnimation = true;
+				break;
+			}
+		}
 		break;
     }
 
