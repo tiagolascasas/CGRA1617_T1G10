@@ -21,9 +21,13 @@ serialInclude([
 	'MySemiSphere.js',
 	'MyPeriscope.js',
 	'BackFin.js',
+	'MyTorpedo.js',
 	'MyRoute.js',
 	'MySphere.js',
 	'MyExplosion.js',
+	'Coords.js',
+	'MyTarget.js',
+
 
 	main=function() {
 		var app = new CGFapplication(document.body);

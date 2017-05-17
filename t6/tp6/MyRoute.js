@@ -6,8 +6,12 @@ function MyRoute(scene,stacks)
   //  this.points = points;
     this.stacks = stacks;
     this.coords = [];
+    this.p1 = [];
+    this.p2 = [];
+    this.p3 = [];
+    this.p4 = [];
 
-    this.calc();
+//    this.calc();
 
 };
 
@@ -16,22 +20,18 @@ MyRoute.prototype.constructor=MyRoute;
 
 MyRoute.prototype.calc= function() {
 
-    this.p1 = [0,0,0];
-    this.p2 = [1,0,0];
-    this.p3 = [2,0,0];
-    this.p4 = [3,0,0];
-
-
     var x,y,z;
-
+   
+    this.coords = [];
+   
     var t;
     for( t= 0; t <= 1; t += 1/this.stacks) {
         x = this.qt1(t,this.p1[0]) + this.qt2(t,this.p2[0]) + this.qt3(t,this.p3[0]) + this.qt4(t,this.p4[0]);
         y = this.qt1(t,this.p1[1]) + this.qt2(t,this.p2[1]) + this.qt3(t,this.p3[1]) + this.qt4(t,this.p4[1]);
         z = this.qt1(t,this.p1[2]) + this.qt2(t,this.p2[2]) + this.qt3(t,this.p3[2]) + this.qt4(t,this.p4[2]);
-        this.coords.push([x,y,z]);
+        this.coords.push(new Coords(x,y,z));
     }
-    console.log(this.coords);
+    console.log("calc");
 
 
 };
