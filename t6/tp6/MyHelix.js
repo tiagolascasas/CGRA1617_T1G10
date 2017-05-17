@@ -40,10 +40,10 @@ MyHelix.prototype.display = function() {
 };
 
 
-MyHelix.prototype.update = function(time) {
+MyHelix.prototype.update = function(time,speed) {
     var deltaT = time - this.previousTime;
     this.previousTime = time;
-    this.helixR = this.helixR + ((2 * Math.PI * deltaT * this.scene.Velocity * this.rotationDir * this.scene.Velocity)/360);
+    this.helixR = this.helixR + ((2 * Math.PI * deltaT * this.scene.Velocity * this.rotationDir * this.scene.Velocity * speed *3)/360);
 
   
 };
