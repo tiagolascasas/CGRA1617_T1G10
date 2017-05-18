@@ -4,8 +4,8 @@
  */
  
  
-function MyInterface() {
-	//call CGFinterface constructor 
+function MyInterface() 
+{
 	CGFinterface.call(this);
 };
 
@@ -16,45 +16,24 @@ MyInterface.prototype.constructor = MyInterface;
  * init
  * @param {CGFapplication} application
  */
-MyInterface.prototype.init = function(application) {
-	// call CGFinterface init
+MyInterface.prototype.init = function(application) 
+{
 	CGFinterface.prototype.init.call(this, application);
-	
-	// init GUI. For more information on the methods, check:
-	//  http://workshop.chromeexperiments.com/examples/gui
 	
 	this.gui = new dat.GUI();
 
-	// add a group of controls (and open/expand by defult)
-	
 	this.gui.add(this.scene, 'submarineAppearanceGUI', this.scene.submarineAppearancesList);
 	
 	var group=this.gui.addFolder("Lights");
 	group.open();
-
-	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
-	// e.g. this.option1=true; this.option2=false;
-	
 	group.add(this.scene, 'Light_0');
 	group.add(this.scene, 'Light_1');
 	group.add(this.scene, 'Light_2');
 	group.add(this.scene, 'Light_3');
 
-	// add a button:
-	// the first parameter is the object that is being controlled (in this case the scene)
-	// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
-	// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
-
 	this.gui.add(this.scene, 'Stop_Clock');	
-	
-	// add a slider
-	// must be a numeric variable of the scene, initialized in scene.init e.g.
-	// this.speed=3;
-	// min and max values can be specified as parameters
-	
-	this.gui.add(this.scene, 'Velocity', 0.1, 1.0);
 
-//	this.gui.add(this.scene, 'Animated_Clock');
+	this.gui.add(this.scene, 'Speed', -2.0, 2.0);
 
 	return true;
 };
@@ -64,13 +43,9 @@ MyInterface.prototype.init = function(application) {
  * @param event {Event}
  */
 MyInterface.prototype.processKeyboard = function(event) {
-	// call CGFinterface default code (omit if you want to override)
+	
 	CGFinterface.prototype.processKeyboard.call(this,event);
-	
-	// Check key codes e.g. here: http://www.asciitable.com/
-	// or use String.fromCharCode(event.keyCode) to compare chars
-	
-	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
+
 	switch (event.keyCode)
 	{
 		case (87): case (119):	//W w
@@ -86,45 +61,44 @@ MyInterface.prototype.processKeyboard = function(event) {
 };
 
 
-MyInterface.prototype.processKeyDown = function(event) {
-
+MyInterface.prototype.processKeyDown = function(event) 
+{
     switch (event.keyCode) {
         case (80): case (112):	//P p
-        this.scene.submarine.periscope.lower();
-        break;
+			this.scene.submarine.periscope.lower();
+			break;
         case (76): case (108):	//L l
-        this.scene.submarine.periscope.lift();
-        break;
+			this.scene.submarine.periscope.lift();
+			break;
 		case (65):	case (97):	//A a
-		this.scene.submarine.turningLeft = true;
-		this.scene.submarine.backFin.isTurningLeft = true;
-		break;
+			this.scene.submarine.turningLeft = true;
+			this.scene.submarine.backFin.isTurningLeft = true;
+			break;
 		case (68): case (100):	//D d
-		this.scene.submarine.turningRight = true;
-		this.scene.submarine.backFin.isTurningRight = true;
-		break;
+			this.scene.submarine.turningRight = true;
+			this.scene.submarine.backFin.isTurningRight = true;
+			break;
 		case (81): case (113):	//Q q
-		this.scene.submarine.goingUp = true;
-		break;
+			this.scene.submarine.goingUp = true;
+			break;
 		case (69): case (101):	//E e
-		this.scene.submarine.goingDown = true;
-		break;
+			this.scene.submarine.goingDown = true;
+			break;
 		case (70): case (102): 	//F f
-		for (i = 0; i < this.scene.targets.length; i++)
-		{
-			if (this.scene.targets[i] != null)
+			for (i = 0; i < this.scene.targets.length; i++)
 			{
-				this.scene.torpedo.startAnimation = true;
-				break;
+				if (this.scene.targets[i] != null)
+				{
+					this.scene.torpedo.startAnimation = true;
+					break;
+				}
 			}
-		}
-		break;
+			break;
     }
-
 };
 
-MyInterface.prototype.processKeyUp = function (event) {
-
+MyInterface.prototype.processKeyUp = function (event) 
+{
     switch (event.keyCode) {
         case (80): case (112):	//P p
         this.scene.submarine.periscope.stopLower();
@@ -140,13 +114,11 @@ MyInterface.prototype.processKeyUp = function (event) {
 		this.scene.submarine.turningRight = false;
 		this.scene.submarine.backFin.isTurningRight = false;
 		break;
-		case (81): case (113):	//D d
+		case (81): case (113):	//Q q
 		this.scene.submarine.goingUp = false;
 		break;
-		case (69): case (101):	//D d
+		case (69): case (101):	//E e
 		this.scene.submarine.goingDown = false;
 		break;
     }
 };
-
-

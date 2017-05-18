@@ -81,7 +81,7 @@ MyTorpedo.prototype.update = function(t)
 	if (!this.startAnimation)
 		return;
 
-	if (this.counter == 1)
+	if (this.counter == 0)
 	{
 		this.x = this.scene.submarine.x;
 		this.y = this.scene.submarine.y - 0.6;
@@ -93,6 +93,9 @@ MyTorpedo.prototype.update = function(t)
 		var p4 = [];
 
 		p1 = [this.x, this.y, this.z];
+		p2 = [	this.scene.submarine.px,
+				this.scene.submarine.py,
+				this.scene.submarine.pz];
 	
 		var i;
 		for (i = 0; i < this.scene.targets.length; i++)
@@ -114,13 +117,11 @@ MyTorpedo.prototype.update = function(t)
 			this.startAnimation = false;
 			return;
 		}
-		p2 = [1, 0, 0];
 		
 		this.route.calc(p1, p2, p3, p4);
-
 		this.counter++;
 	}
-	else if (this.counter > 1 && this.counter < this.route.stacks)
+	else if (this.counter < this.route.stacks)
 	{
 		this.x = this.route.coords[this.counter].x;
 		this.y = this.route.coords[this.counter].y;
@@ -131,12 +132,7 @@ MyTorpedo.prototype.update = function(t)
 	else
 	{
 		this.startAnimation = false;
-		this.counter = 1;
+		this.counter = 0;
 		this.scene.targets[this.currentTarget] = null;
 	}
 };
-
-
-MyTorpedo.prototype.start = function(){
-	this.counter++;
-}

@@ -12,6 +12,10 @@ function MyTarget(scene, x, y, z)
 	this.x = x;
 	this.y = y;
 	this.z = z;
+
+	this.copper = new CGFappearance(this.scene);
+	this.copper.loadTexture("../resources/images/copper.png");
+	this.copper.setTextureWrap('REPEAT', 'REPEAT');
 };
 
 MyTarget.prototype = Object.create(CGFobject.prototype);
@@ -20,6 +24,8 @@ MyTarget.prototype.constructor=MyTarget;
 MyTarget.prototype.display = function()
 {
 	this.scene.pushMatrix();
+
+	this.copper.apply();
 
 	this.scene.translate(this.x, this.y, this.z);
 	this.scene.scale(0.2, 0.2, 0.2);
@@ -34,10 +40,4 @@ MyTarget.prototype.display = function()
 	this.scene.popMatrix();
 
 	this.scene.popMatrix();
-};
-
-
-MyTarget.prototype.update = function(t)
-{
-
 };

@@ -5,7 +5,6 @@ function MyHelix(scene) {
   
 	this.rotationDir = 1;
 
-
 	this.previousTime = Date.now();
 	
 	this.helix = new MyQuad(this.scene, 0, 1, 0, 1);
@@ -36,7 +35,6 @@ MyHelix.prototype.display = function() {
 		this.scene.scale(0.025, 0.025, 0.1);
 		this.top.display();
 	this.scene.popMatrix();
-
 };
 
 
@@ -44,14 +42,10 @@ MyHelix.prototype.update = function(time,speed) {
     var deltaT = time - this.previousTime;
     this.previousTime = time;
 
-    if(speed >0)
-        this.helixR +=  ((2 * Math.PI * deltaT * this.scene.Velocity * this.scene.Velocity * speed *3)/360) ;
+    if(this.scene.Speed > 0)
+        this.helixR +=  ((2 * Math.PI * deltaT * this.scene.Speed * this.scene.Speed * speed *3)/360) ;
     else
-        this.helixR -=  ((2 * Math.PI * deltaT * this.scene.Velocity * this.scene.Velocity * speed *3)/360);
-
-
-
-  
+        this.helixR -=  ((2 * Math.PI * deltaT * this.scene.Speed * this.scene.Speed * speed *3)/360);
 };
 
 MyHelix.prototype.increaseSpeed = function() {

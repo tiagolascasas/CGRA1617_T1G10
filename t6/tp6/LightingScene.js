@@ -1,13 +1,15 @@
 var degToRad = Math.PI / 180.0;
 
-function LightingScene() {
+function LightingScene() 
+{
 	CGFscene.call(this);
 }
 
 LightingScene.prototype = Object.create(CGFscene.prototype);
 LightingScene.prototype.constructor = LightingScene;
 
-LightingScene.prototype.init = function(application) {
+LightingScene.prototype.init = function(application) 
+{
 	CGFscene.prototype.init.call(this, application);
 
 	this.enableTextures(true);
@@ -42,8 +44,7 @@ LightingScene.prototype.init = function(application) {
     this.redMaterial.setSpecular(1.0, 0.5, 0.0, 1);
     this.redMaterial.setDiffuse(1.0, 0.5, 0.0, 1);
 	
-	//appearances
-	
+	// Textures
 	this.metal = new CGFappearance(this);
 	this.metal.loadTexture("../resources/images/metal1.png");
 	this.metal.setTextureWrap('REPEAT', 'REPEAT');
@@ -56,15 +57,11 @@ LightingScene.prototype.init = function(application) {
 	this.gold.loadTexture("../resources/images/gold.png");
 	this.gold.setTextureWrap('REPEAT', 'REPEAT');
 
-
 	this.submarineAppearancesList = [
 		"Metal",
 		"Wood",
 		"Gold"
 	];
-	
-	
-	
 	this.submarineAppearanceGUI = "Metal";
 	this.currSubmarineAppearance =  0;
 	this.submarineAppearance = [];
@@ -80,42 +77,47 @@ LightingScene.prototype.init = function(application) {
 	this.poleLid = new MyPolygon(this, 30);
 	this.submarine = new MySubmarine(this, -3, 10.5, 1.2, 10, -3, 10.5);
 	this.torpedo = new MyTorpedo(this);
-	this.torpedo.start();
 
 	this.targets = [];
+	this.explosions = [];
+
 	this.targets.push(new MyTarget(this, 0, 1, 1));
+	this.explosions.push(new MyExplosion(this, 0, 1, 1));
+
 	this.targets.push(new MyTarget(this, 5, 1, 5));
+	this.explosions.push(new MyExplosion(this, 5, 1, 5));
+
 	this.targets.push(new MyTarget(this, 2, 2, 0));
+	this.explosions.push(new MyExplosion(this, 2, 2, 0));
 
 	this.axis = new CGFaxis(this);
 
+	// Variables and flags
 	this.refreshRate = 50;
 	this.setUpdatePeriod(this.refreshRate);
-	this.Velocity = 0.1;
+	this.Speed = 0.1;
 
 	this.Light_0 = true;
 	this.Light_1 = true;
 	this.Light_2 = true;
 	this.Light_3 = true;
 	this.Animated_Clock = true;
-	this.explosion = new MyExplosion(this,2,2,2);
-	
 };
 
 LightingScene.prototype.initCameras = function() {
 	this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
 };
 
-LightingScene.prototype.initLights = function() {
-	//this.setGlobalAmbientLight(0.5,0.5,0.5, 1.0);
+LightingScene.prototype.initLights = function() 
+{
 	this.setGlobalAmbientLight(0, 0, 0, 1.0);
 	
 	// Positions for four lights
 	this.lights[0].setPosition(4, 6, 1, 1);
-	this.lights[0].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[0].setVisible(true);
 	
 	this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
-	this.lights[1].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[1].setVisible(true);
 
 	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 	this.lights[2].setVisible(true);
@@ -155,24 +157,20 @@ LightingScene.prototype.updateLights = function() {
 		this.lights[i].update();
 }
 
-LightingScene.prototype.display = function() {
+LightingScene.prototype.display = function() 
+{
 	// ---- BEGIN Background, camera and axis setup
 
-	// Clear image and depth buffer everytime we update the scene
 	this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 	this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
-	// Initialize Model-View matrix as identity (no transformation)
 	this.updateProjectionMatrix();
 	this.loadIdentity();
 
-	// Apply transformations corresponding to the camera position relative to the origin
 	this.applyViewMatrix();
 
-	// Update all lights used
 	this.updateLights();
 
-	// Draw axis
 	this.axis.display();
 
 	this.materialDefault.apply();
@@ -230,13 +228,16 @@ LightingScene.prototype.display = function() {
 			this.targets[i].display();
 			this.popMatrix();
 		}
+		else if (this.explosions[i] != null)
+		{
+			this.pushMatrix();
+			this.explosions[i].display();
+			this.popMatrix();
+		}
 	}
-
 
 	this.changeAppearence();
 	// ---- END Primitive drawing section
-
-
 };
 
 LightingScene.prototype.update = function(currTime)
@@ -248,12 +249,10 @@ LightingScene.prototype.update = function(currTime)
 
 	this.torpedo.update();
 
-	
 	this.Light_0 ? this.lights[0].enable() : this.lights[0].disable();
 	this.Light_1 ? this.lights[1].enable() : this.lights[1].disable();
 	this.Light_2 ? this.lights[2].enable() : this.lights[2].disable();
 	this.Light_3 ? this.lights[3].enable() : this.lights[3].disable();
-
 };
 
 LightingScene.prototype.Stop_Clock = function ()
@@ -262,10 +261,12 @@ LightingScene.prototype.Stop_Clock = function ()
 };
 
 
-LightingScene.prototype.changeAppearence = function (){
-	    //GUI Appearance choice  
+LightingScene.prototype.changeAppearence = function ()
+{
+	//GUI Appearance choice  
 
-	switch (this.submarineAppearanceGUI) {
+	switch (this.submarineAppearanceGUI) 
+	{
     case "Metal":
         this.currSubmarineAppearance = 0;
         break;

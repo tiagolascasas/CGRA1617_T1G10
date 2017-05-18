@@ -16,7 +16,6 @@ function MySubmarine(scene, xmin, xmax, ymin, ymax, zmin, zmax)
 	this.periscope = new MyPeriscope(this.scene);
 	this.backFin = new BackFin(this.scene);
 
-	
 	this.xmin = xmin;
 	this.xmax = xmax;
 	this.ymin = ymin;
@@ -29,14 +28,17 @@ function MySubmarine(scene, xmin, xmax, ymin, ymax, zmin, zmax)
 	this.z = 0.0;
 	this.rotation = 0.0;
 	this.verticalRotation = 0.0;
-	this.speed = 0.1;
+//	this.speed = 0.0;
 	this.previousTime = Date.now();
+
+	this.px = 0.0;
+	this.py = 3.0;
+	this.pz = 6.0;
 
 	this.goingUp= false;
 	this.goingDown = false;
 	this.turningLeft = false;
 	this.turningRight = false;
-
 };
 
 MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -185,20 +187,14 @@ MySubmarine.prototype.move = function(mov, ds)
 {
 	if (mov == 'FORWARD')
 	{
-		this.speed  += 0.1;
+		if (this.scene.Speed < 2.0)
+			this.scene.Speed  += 0.1;
 	}
 	else if (mov == 'BACKWARD')
 	{
-		this.speed -= 0.1;
+		if (this.scene.Speed > -2.0)
+			this.scene.Speed -= 0.1;
 	}
-/*	else if (mov == 'R_LEFT')
-	{
-		this.rotation += ddddddddddddddd
-	}
-	else if (mov == 'R_RIGHT')
-	{
-		this.rotation -= Math.PI/30;
-	}*/
 };
 
 MySubmarine.prototype.applyAppearance = function ()
@@ -211,19 +207,19 @@ MySubmarine.prototype.update = function(t)
 {
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
-	this.helix.update(t,this.speed);
+	this.helix.update(t,this.scene.Speed);
     this.periscope.update(t);
     this.backFin.update();
 
      if (this.goingUp) {
         if(this.verticalRotation > -(Math.PI /12))
          this.verticalRotation -= Math.PI / 360;
-         this.y+=0.01;
+         this.y += 0.01;
      }
      else if (this.goingDown) {
         if(this.verticalRotation < (Math.PI /12))
          this.verticalRotation += Math.PI / 360;
-         this.y-=0.01;
+         this.y -= 0.01;
      }
      else{
          if(this.verticalRotation != 0)
@@ -237,8 +233,8 @@ MySubmarine.prototype.update = function(t)
      	this.rotation -= Math.PI/500;
      }
 
-     this.x += (Math.sin(this.rotation)/100)*this.speed;
-     this.z += (Math.cos(this.rotation)/100)*this.speed;
+     this.x += (Math.sin(this.rotation)/100)*this.scene.Speed;
+     this.z += (Math.cos(this.rotation)/100)*this.scene.Speed;
 
      this.checkBounds();
 };
