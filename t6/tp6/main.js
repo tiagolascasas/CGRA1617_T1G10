@@ -27,7 +27,7 @@ serialInclude([
 	'MyExplosion.js',
 	'Coords.js',
 	'MyTarget.js',
-
+	'HorizontalFin.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

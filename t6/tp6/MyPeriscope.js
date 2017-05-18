@@ -13,7 +13,7 @@ function MyPeriscope(scene) {
     //position
     this.currentLength= .5;
     this.minLength = .25;
-    this.maxLength = 2;
+    this.maxLength = 1;
 
     this.lowering = false;
     this.lifting = false;

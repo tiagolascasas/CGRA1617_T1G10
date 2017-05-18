@@ -21,8 +21,6 @@ MyInterface.prototype.init = function(application)
 	CGFinterface.prototype.init.call(this, application);
 	
 	this.gui = new dat.GUI();
-
-	this.gui.add(this.scene, 'submarineAppearanceGUI', this.scene.submarineAppearancesList);
 	
 	var group=this.gui.addFolder("Lights");
 	group.open();
@@ -33,7 +31,9 @@ MyInterface.prototype.init = function(application)
 
 	this.gui.add(this.scene, 'Stop_Clock');	
 
-	this.gui.add(this.scene, 'Speed', -2.0, 2.0);
+	this.gui.add(this.scene, 'Speed', -2.5, 2.5);
+
+	this.gui.add(this.scene, 'submarineAppearanceGUI', this.scene.submarineAppearancesList);
 
 	return true;
 };
@@ -49,11 +49,11 @@ MyInterface.prototype.processKeyboard = function(event) {
 	switch (event.keyCode)
 	{
 		case (87): case (119):	//W w
-			this.scene.submarine.move('FORWARD', this.scene.Velocity);
+			this.scene.submarine.move('FORWARD');
 			break;
 
 		case (83): case (115):	//S s
-			this.scene.submarine.move('BACKWARD', this.scene.Velocity);
+			this.scene.submarine.move('BACKWARD');
 			break;
 
 		default: break;
@@ -80,9 +80,11 @@ MyInterface.prototype.processKeyDown = function(event)
 			break;
 		case (81): case (113):	//Q q
 			this.scene.submarine.goingUp = true;
+			this.scene.submarine.horizontalFin.isGoingUp = true;
 			break;
 		case (69): case (101):	//E e
 			this.scene.submarine.goingDown = true;
+			this.scene.submarine.horizontalFin.isGoingDown = true;
 			break;
 		case (70): case (102): 	//F f
 			for (i = 0; i < this.scene.targets.length; i++)
@@ -116,9 +118,11 @@ MyInterface.prototype.processKeyUp = function (event)
 		break;
 		case (81): case (113):	//Q q
 		this.scene.submarine.goingUp = false;
+		this.scene.submarine.horizontalFin.isGoingUp = false;
 		break;
 		case (69): case (101):	//E e
 		this.scene.submarine.goingDown = false;
+		this.scene.submarine.horizontalFin.isGoingDown = false;
 		break;
     }
 };

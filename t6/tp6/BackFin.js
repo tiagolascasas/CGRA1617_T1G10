@@ -44,8 +44,6 @@ BackFin.prototype.display = function() {
      this.scene.translate(0, 0, -0.5);
      this.cube.display();
     this.scene.popMatrix();
-
-
 };
 
 BackFin.prototype.update = function()
@@ -62,5 +60,4 @@ BackFin.prototype.update = function()
          if(this.currentAngle != 0)
          this.currentAngle += -1 * this.currentAngle/20;
      }
-
 }

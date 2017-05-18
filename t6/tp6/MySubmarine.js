@@ -15,6 +15,7 @@ function MySubmarine(scene, xmin, xmax, ymin, ymax, zmin, zmax)
 	this.cube = new MyUnitCubeQuad(this.scene);
 	this.periscope = new MyPeriscope(this.scene);
 	this.backFin = new BackFin(this.scene);
+	this.horizontalFin = new HorizontalFin(this.scene);
 
 	this.xmin = xmin;
 	this.xmax = xmax;
@@ -28,7 +29,6 @@ function MySubmarine(scene, xmin, xmax, ymin, ymax, zmin, zmax)
 	this.z = 0.0;
 	this.rotation = 0.0;
 	this.verticalRotation = 0.0;
-//	this.speed = 0.0;
 	this.previousTime = Date.now();
 
 	this.px = 0.0;
@@ -53,62 +53,18 @@ MySubmarine.prototype.display = function()
 	this.scene.rotate(this.rotation, 0, 1, 0);
 	this.scene.translate(0, 0, -2.04);
 
-	this.scene.pushMatrix();	//front h fin edge #2
-		this.scene.translate(-0.61, 0.8, 2.4);
-		this.scene.rotate(3*Math.PI / 2, 0, 0, 1);
-		this.scene.scale(0.075, 0.35, 0.25);
-		this.scene.rotate(-Math.PI, 1, 0, 0);
-		this.scene.rotate(Math.PI / 2, 0, 1, 0);
-		this.scene.translate(-1, 0, -0.5);
-		this.prism.display();
+	this.scene.pushMatrix();	//front h fin
+		this.scene.translate(0, 0.8, 2.1);
+		this.scene.rotate(Math.PI, 1, 0, 0);
+		this.scene.scale(0.7, 1, 1);
+		this.horizontalFin.display();
 	this.scene.popMatrix();
 
-	this.scene.pushMatrix();	//front h fin edge #1
-		this.scene.rotate(Math.PI / 2, 0, 0, 1);
-		this.scene.translate(0.8, -0.61, 2.4);
-		this.scene.scale(0.075, 0.35, 0.25);
-		this.scene.rotate(-Math.PI, 1, 0, 0);
-		this.scene.rotate(Math.PI / 2, 0, 1, 0);
-		this.scene.translate(-1, 0, -0.5);
-		this.prism.display();
+	this.scene.pushMatrix();	//back h fin
+		this.horizontalFin.display();
 	this.scene.popMatrix();
 
-	this.scene.pushMatrix();	//front horizontal fin
-		this.scene.translate(0, 0.8, 2.4);
-		this.scene.rotate(Math.PI / 2, 0, 0, 1);
-		this.scene.scale(0.075, 1.22, 0.25);
-		this.scene.translate(0, 0, -0.5);
-		this.cube.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//back h fin edge #2
-		this.scene.rotate(3 * Math.PI / 2, 0, 0, 1);
-		this.scene.translate(0, -0.82, 0);
-		this.scene.scale(0.075, 0.35, 0.25);
-		this.scene.rotate(-Math.PI, 1, 0, 0);
-		this.scene.rotate(Math.PI / 2, 0, 1, 0);
-		this.scene.translate(-1, 0, -0.5);
-		this.prism.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//back h fin edge #1
-		this.scene.rotate(Math.PI / 2, 0, 0, 1);
-		this.scene.translate(0, -0.82, 0);
-		this.scene.scale(0.075, 0.35, 0.25);
-		this.scene.rotate(-Math.PI, 1, 0, 0);
-		this.scene.rotate(Math.PI / 2, 0, 1, 0);
-		this.scene.translate(-1, 0, -0.5);
-		this.prism.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//back horizontal fin
-		this.scene.rotate(Math.PI / 2, 0, 0, 1);
-		this.scene.scale(0.075, 1.64, 0.25);
-		this.scene.translate(0, 0, -0.5);
-		this.cube.display();
-	this.scene.popMatrix();
-
-	this.scene.pushMatrix();	//back v fin edge #2
+	this.scene.pushMatrix();	//back v fin
 		this.backFin.display();
 	this.scene.popMatrix();
 
@@ -183,16 +139,16 @@ MySubmarine.prototype.display = function()
 	this.scene.popMatrix();
 };
 
-MySubmarine.prototype.move = function(mov, ds)
+MySubmarine.prototype.move = function(mov)
 {
 	if (mov == 'FORWARD')
 	{
-		if (this.scene.Speed < 2.0)
+		if (this.scene.Speed < 2.5)
 			this.scene.Speed  += 0.1;
 	}
 	else if (mov == 'BACKWARD')
 	{
-		if (this.scene.Speed > -2.0)
+		if (this.scene.Speed > -2.5)
 			this.scene.Speed -= 0.1;
 	}
 };
@@ -208,35 +164,39 @@ MySubmarine.prototype.update = function(t)
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
 	this.helix.update(t,this.scene.Speed);
-    this.periscope.update(t);
-    this.backFin.update();
+	this.periscope.update(t);
+	this.backFin.update();
+	this.horizontalFin.update();
 
-     if (this.goingUp) {
-        if(this.verticalRotation > -(Math.PI /12))
-         this.verticalRotation -= Math.PI / 360;
-         this.y += 0.01;
-     }
-     else if (this.goingDown) {
-        if(this.verticalRotation < (Math.PI /12))
-         this.verticalRotation += Math.PI / 360;
-         this.y -= 0.01;
-     }
-     else{
-         if(this.verticalRotation != 0)
-         this.verticalRotation += -1 * this.verticalRotation/20;
-     }
+	if (this.goingUp) {
+		if(this.verticalRotation > -(Math.PI /12))
+		 this.verticalRotation -= Math.PI / 360;
+		 this.y += 0.02;
+	}
+	else if (this.goingDown) {
+		if(this.verticalRotation < (Math.PI /12))
+		 this.verticalRotation += Math.PI / 360;
+		 this.y -= 0.02;
+	}
+	else{
+		 if(this.verticalRotation != 0)
+		 this.verticalRotation += -1 * this.verticalRotation/20;
+	}
 
-     if(this.turningLeft){
-		this.rotation += Math.PI/500;
-     }
-     else if(this.turningRight) {
-     	this.rotation -= Math.PI/500;
-     }
+	if(this.turningLeft){
+		this.rotation += Math.PI/200;
+	}
+	else if(this.turningRight) {
+		this.rotation -= Math.PI/200;
+	}
 
-     this.x += (Math.sin(this.rotation)/100)*this.scene.Speed;
-     this.z += (Math.cos(this.rotation)/100)*this.scene.Speed;
+	this.x += (Math.sin(this.rotation)/100)*this.scene.Speed;
+	this.z += (Math.cos(this.rotation)/100)*this.scene.Speed;
 
-     this.checkBounds();
+	this.px += (Math.sin(this.rotation)/100)*this.scene.Speed;
+	this.pz += (Math.cos(this.rotation)/100)*this.scene.Speed;
+
+	this.checkBounds();
 };
 
 MySubmarine.prototype.checkBounds = function()
