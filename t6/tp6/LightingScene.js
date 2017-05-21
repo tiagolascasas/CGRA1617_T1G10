@@ -52,6 +52,7 @@ LightingScene.prototype.init = function(application)
 
 
 
+
     // Textures
 	this.metal = new CGFappearance(this);
 	this.metal.loadTexture("../resources/images/metal1.png");
@@ -224,6 +225,7 @@ LightingScene.prototype.display = function()
 	
 	// Torpedo
     this.pushMatrix();
+    	this.poleMaterial.apply();
 		this.torpedo.display();
     this.popMatrix();
 

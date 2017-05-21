@@ -30,9 +30,8 @@ function MyTorpedo(scene)
 	this.x = 0.0;
 	this.y = 0.0;
 	this.z = 0.0;
-	this.xAngle = 0.0;
-	this.yAngle = 0.0;
-	this.zAngle = 0.0;
+	this.alphaAngle =  Math.PI;
+	this.deltaAngle = 0;
 	this.startAnimation = false;
 };
 
@@ -47,9 +46,9 @@ MyTorpedo.prototype.display = function()
 	this.scene.pushMatrix();
 
 	this.scene.translate(this.x, this.y, this.z);
-	this.scene.rotate(this.zAngle, 0, 0, 1);
-	this.scene.rotate(this.yAngle, 0, 1, 0);
-	this.scene.rotate(this.xAngle, 1, 0, 0);
+	this.scene.rotate(this.alphaAngle, 1,0, 0);
+	this.scene.rotate(this.deltaAngle, 0, 1, 0);
+
 	this.appearance.apply();
 
 	this.scene.pushMatrix();
@@ -72,6 +71,7 @@ MyTorpedo.prototype.display = function()
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.translate(0, 0, 0.4);
 		this.scene.scale(0.1, 0.1, 0.1);
+
 		this.top.display();
 	this.scene.popMatrix();
 
@@ -79,6 +79,7 @@ MyTorpedo.prototype.display = function()
 		this.metal.apply();
 		this.scene.translate(0, 0, 0.4);
 		this.scene.scale(0.1, 0.1, 0.1);
+
 		this.top.display();
 	this.scene.popMatrix();
 
@@ -158,14 +159,15 @@ MyTorpedo.prototype.update = function(t)
 MyTorpedo.prototype.calcOrientation = function()
 {
 	var xp, yp, zp;
-	xp = this.route.coords[this.counter].x -
-			this.route.coords[this.counter + 1].x;
-	yp = this.route.coords[this.counter].y -
-			this.route.coords[this.counter + 1].y;
-	zp = this.route.coords[this.counter].z -
-			this.route.coords[this.counter + 1].z;
+	xp = this.route.coords[this.counter + 1].x - this.route.coords[this.counter].x ;
 
-	this.xAngle = Math.atan2(yp, zp);
-	this.yAngle = Math.atan2(xp, zp);
-	this.zAngle = Math.atan2(xp, yp);
+	yp = this.route.coords[this.counter + 1].y - this.route.coords[this.counter].y;
+
+	zp = this.route.coords[this.counter + 1].z - this.route.coords[this.counter].z;
+
+	console.log(xp +" " + yp + zp);
+
+	this.deltaAngle += Math.atan2(zp, xp) * degToRad;
+	this.alphaAngle += Math.atan2(yp, zp) * degToRad;
+
 };

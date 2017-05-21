@@ -31,7 +31,7 @@ MyInterface.prototype.init = function(application)
 
 	this.gui.add(this.scene, 'Stop_Clock');	
 
-	this.gui.add(this.scene, 'Speed', -0.5, 0.5);
+	this.gui.add(this.scene, 'Speed', -2, 2);
 
 	this.gui.add(this.scene, 'submarineAppearanceGUI', this.scene.submarineAppearancesList);
 
