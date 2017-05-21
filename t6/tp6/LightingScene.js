@@ -90,14 +90,14 @@ LightingScene.prototype.init = function(application)
 	this.targets = [];
 	this.explosions = [];
 
-	this.targets.push(new MyTarget(this, 0, 1, 1));
-	this.explosions.push(new MyExplosion(this, 0, 1, 1));
+	this.targets.push(new MyTarget(this, 0, 0.2, 1));
+	this.explosions.push(new MyExplosion(this, 0, 0.2, 1));
 
-	this.targets.push(new MyTarget(this, 5, 1, 5));
-	this.explosions.push(new MyExplosion(this, 5, 1, 5));
+	this.targets.push(new MyTarget(this, 5, 0.2, 5));
+	this.explosions.push(new MyExplosion(this, 5, 0.2, 5));
 
-	this.targets.push(new MyTarget(this, 2, 2, 0));
-	this.explosions.push(new MyExplosion(this, 2, 2, 0));
+	this.targets.push(new MyTarget(this, 2, 0.2, 0));
+	this.explosions.push(new MyExplosion(this, 2, 0.2, 0));
 
 	this.axis = new CGFaxis(this);
 

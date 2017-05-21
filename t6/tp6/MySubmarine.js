@@ -172,11 +172,13 @@ MySubmarine.prototype.update = function(t)
 		if(this.verticalRotation > -(Math.PI /12))
 		 this.verticalRotation -= Math.PI / 360;
 		 this.y += 0.02;
+		 this.py += 0.02;
 	}
 	else if (this.goingDown) {
 		if(this.verticalRotation < (Math.PI /12))
 		 this.verticalRotation += Math.PI / 360;
 		 this.y -= 0.02;
+		 this.py -= 0.02;
 	}
 	else{
 		 if(this.verticalRotation != 0)

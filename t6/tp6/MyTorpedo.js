@@ -165,8 +165,6 @@ MyTorpedo.prototype.calcOrientation = function()
 
 	zp = this.route.coords[this.counter + 1].z - this.route.coords[this.counter].z;
 
-	console.log(xp +" " + yp + zp);
-
 	this.deltaAngle += Math.atan2(zp, xp) * degToRad;
 	this.alphaAngle += Math.atan2(yp, zp) * degToRad;
 

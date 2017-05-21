@@ -28,9 +28,6 @@ MyRoute.prototype.calc= function(p1, p2, p3, p4) {
     );
 
     this.stacks = (1000 / this.scene.refreshRate) * dist;
-    console.log(this.stacks);
-    console.log(dist);
-    console.log(this.scene.refreshRate);
 
     var t;
     for( t= 0; t <= 1; t += 1/this.stacks) {
