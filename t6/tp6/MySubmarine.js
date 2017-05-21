@@ -143,12 +143,12 @@ MySubmarine.prototype.move = function(mov)
 {
 	if (mov == 'FORWARD')
 	{
-		if (this.scene.Speed < 2.5)
+		if (this.scene.Speed < 2)
 			this.scene.Speed  += 0.1;
 	}
 	else if (mov == 'BACKWARD')
 	{
-		if (this.scene.Speed > -2.5)
+		if (this.scene.Speed > -2)
 			this.scene.Speed -= 0.1;
 	}
 };
@@ -163,7 +163,7 @@ MySubmarine.prototype.update = function(t)
 {
 	var deltaT = t - this.previousTime;
 	this.previousTime = t;
-	this.helix.update(t,this.scene.Speed);
+	this.helix.update(t);
 	this.periscope.update(t);
 	this.backFin.update();
 	this.horizontalFin.update();

@@ -43,8 +43,16 @@ LightingScene.prototype.init = function(application)
     this.redMaterial.setAmbient(1.0, 0.0, 0.0, 1);
     this.redMaterial.setSpecular(1.0, 0.5, 0.0, 1);
     this.redMaterial.setDiffuse(1.0, 0.5, 0.0, 1);
-	
-	// Textures
+
+
+    this.yellowMaterial = new CGFappearance(this);
+    this.yellowMaterial.setAmbient(1.0, 1, 0.0, 1);
+    this.yellowMaterial.setSpecular(1.0, 1, 0.0, 1);
+    this.yellowMaterial.setDiffuse(1.0, 1, 0.0, 1);
+
+
+
+    // Textures
 	this.metal = new CGFappearance(this);
 	this.metal.loadTexture("../resources/images/metal1.png");
 	this.metal.setTextureWrap('REPEAT', 'REPEAT');
@@ -95,7 +103,7 @@ LightingScene.prototype.init = function(application)
 	// Variables and flags
 	this.refreshRate = 50;
 	this.setUpdatePeriod(this.refreshRate);
-	this.Speed = 0.1;
+	this.Speed = 0.5;
 
 	this.Light_0 = true;
 	this.Light_1 = true;

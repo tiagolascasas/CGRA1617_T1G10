@@ -158,11 +158,11 @@ MyTorpedo.prototype.update = function(t)
 MyTorpedo.prototype.calcOrientation = function()
 {
 	var xp, yp, zp;
-	xp = this.route.coords[this.counter].x - 
+	xp = this.route.coords[this.counter].x -
 			this.route.coords[this.counter + 1].x;
-	yp = this.route.coords[this.counter].y - 
+	yp = this.route.coords[this.counter].y -
 			this.route.coords[this.counter + 1].y;
-	zp = this.route.coords[this.counter].z - 
+	zp = this.route.coords[this.counter].z -
 			this.route.coords[this.counter + 1].z;
 
 	this.xAngle = Math.atan2(yp, zp);

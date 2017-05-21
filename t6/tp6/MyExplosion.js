@@ -14,9 +14,6 @@ function MyExplosion(scene,x,y,z) {
     this.x=x;
     this.y=y;
     this.z=z;
-    /* this.fire = new CGFappearance(this);
-     this.fire.loadTexture("../resources/images/fire.png");*/
-    //this.fire.setTextureWrap('REPEAT', 'REPEAT');
     this.counter = 0;
 
 };
@@ -31,7 +28,7 @@ MyExplosion.prototype.display = function ()
     {
       this.scene.pushMatrix();
       this.scene.translate(this.x,this.y,this.z);
-      this.scene.translate(Math.random(10),Math.random(10),Math.random(10));
+      this.scene.translate(Math.random(1)+0.2,Math.random(1)+0.2,Math.random(+0.2));
       this.scene.scale(0.4, 0.4, 0.4);
       this.sphere.display();
       this.scene.popMatrix();
